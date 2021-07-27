@@ -1,0 +1,94 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarqube-data
+  labels:
+    name: sonarqube-data
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /k3s/sonarqube/data
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: sonarqube-conf
+  labels:
+    name: sonarqube-conf
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /k3s/sonarqube/conf
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: sonarqube
+  name: sonarqube-extensions
+  labels:
+    name: sonarqube-extensions
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /k3s/sonarqube/extensions
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: sonarqube
+  name: sonarqube-logs
+  labels:
+    name: sonarqube-logs
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /k3s/sonarqube/logs
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: sonarqube
+  name: sonarqube-temp
+  labels:
+    name: sonarqube-temp
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /k3s/sonarqube/temp
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  namespace: sonarqube
+  name: sonarqube-postgres
+  labels:
+    name: sonarqube-postgres
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    server: CHANGEME
+    path: /k3s/sonarqube/postgres

@@ -1,0 +1,86 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarqube
+  namespace: sonarqube
+  labels:
+    app: sonarqube
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarqube
+  template:
+    metadata:
+      labels:
+        app: sonarqube
+        name: sonarqube
+    spec:
+      containers:
+      - name: sonarqube
+        image: effitient/sonarqube:8.9.1.44547
+        imagePullPolicy: Always
+        ports:
+         - name: http-port
+           containerPort: 9000
+        resources:
+          limits:
+            cpu: 1
+            memory: 1.5Gi
+        env:
+          # These no longer work after v8.0 so commenting out
+          #- name: SONARQUBE_JDBC_USERNAME
+          #  value: postgres
+          #- name: SONARQUBE_JDBC_PASSWORD
+          #  value: mypassword
+          #- name: SONARQUBE_JDBC_URL
+          #  value: jdbc:postgresql://localhost:5432/sonar
+          #
+          # After v8 you need to add these to ./conf/sonar.properties
+        volumeMounts:
+          - name: sonarqube-data
+            mountPath: "/opt/sonarqube/data"
+          - name: sonarqube-conf
+            mountPath: "/opt/sonarqube/conf"
+          - name: sonarqube-extensions
+            mountPath: "/opt/sonarqube/extensions"
+          - name: sonarqube-logs
+            mountPath: "/opt/sonarqube/logs"
+          - name: sonarqube-temp
+            mountPath: "/opt/sonarqube/temp"
+      - name: postgres
+        image: postgres:13.3
+        ports:
+          - containerPort: 5432
+        resources:
+          limits:
+            cpu: 1
+            memory: 1.5Gi
+        env:
+          - name: POSTGRES_PASSWORD
+            value: mypassword
+          - name: POSTGRES_DB
+            value: sonar
+        volumeMounts:
+          - name: sonarqube-postgres
+            mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: sonarqube-postgres
+        persistentVolumeClaim:
+          claimName: sonarqube-postgres
+      - name: sonarqube-data
+        persistentVolumeClaim:
+          claimName: sonarqube-data
+      - name: sonarqube-conf
+        persistentVolumeClaim:
+          claimName: sonarqube-conf
+      - name: sonarqube-extensions
+        persistentVolumeClaim:
+          claimName: sonarqube-extensions
+      - name: sonarqube-logs
+        persistentVolumeClaim:
+          claimName: sonarqube-logs
+      - name: sonarqube-temp
+        persistentVolumeClaim:
+          claimName: sonarqube-temp

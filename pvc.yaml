@@ -1,0 +1,96 @@
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: sonarqube
+  name: sonarqube-data
+spec:
+  selector:
+    matchLabels:
+      name: sonarqube-data
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: sonarqube
+  name: sonarqube-conf
+spec:
+  selector:
+    matchLabels:
+      name: sonarqube-conf
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: sonarqube
+  name: sonarqube-extensions
+spec:
+  selector:
+    matchLabels:
+      name: sonarqube-extensions
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: sonarqube
+  name: sonarqube-logs
+spec:
+  selector:
+    matchLabels:
+      name: sonarqube-logs
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: sonarqube
+  name: sonarqube-temp
+spec:
+  selector:
+    matchLabels:
+      name: sonarqube-temp
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  namespace: sonarqube
+  name: sonarqube-postgres
+spec:
+  selector:
+    matchLabels:
+      name: sonarqube-postgres
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
